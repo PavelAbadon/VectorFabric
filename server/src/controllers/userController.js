@@ -31,4 +31,9 @@ userController.post('/login', async (req, res) => {
     } 
 })
 
+//LOGOUT
+userController.get('/logout', async (req, res) => {
+    res.status(204).end();
+})
+
 export default userController;

@@ -17,8 +17,7 @@ export async function register (email, password){
 //Login
 export async function login (email, password){
     const user = await User.findOne({ email });
-    const token = generateAuthToken(user);
-
+    
     if (!user) {
         throw new Error('User does not exist');
     }
@@ -28,6 +27,8 @@ export async function login (email, password){
     if (!isValidPassword) {
         throw new Error('The password is incorrect.');
     }
+
+    const token = generateAuthToken(user);
 
     return {
         _id: user.id,
