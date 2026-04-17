@@ -8,6 +8,9 @@ const app = express();
 // Add CORS
 app.use(cors());
 
+// Add json parser
+app.use(express.json());
+
 // Add routes
 app.use(routes);
 
