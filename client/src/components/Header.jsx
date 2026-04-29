@@ -6,8 +6,8 @@ export default function Header (){
             <input class="search-bar" placeholder="Search vectors..." />
             <nav>
                 <a href="#">Gallery</a>
-                <a href="#">Login</a>
-                <a href="#">Register</a>
+                <a href="/login">Login</a>
+                <a href="/register">Register</a>
                 <a href="#">Logout</a>
                 <a href="#">Profile</a>
             </nav>
