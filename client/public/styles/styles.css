@@ -1,0 +1,96 @@
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+header {
+  background: #222;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.search-bar {
+  padding: 8px;
+  width: 250px;
+}
+
+.container {
+  padding: 30px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 6px;
+}
+
+footer {
+  background: #222;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 40px;
+}
+
+.section-title {
+  margin: 30px 0 15px;
+}
+
+.categories {
+  display: flex;
+  overflow: hidden;
+  gap: 15px;
+}
+
+.category {
+  min-width: 200px;
+  background: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.slider {
+  display: flex;
+  align-items: center;
+}
+
+.slider button {
+  height: 40px;
+}
+
+.form-container {
+  max-width: 400px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.form-container input, .form-container button {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+}
