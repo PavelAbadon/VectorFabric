@@ -1,15 +1,18 @@
+import { Link } from "react-router"
+
 export default function Header (){
     return(
         <>
         <header>
             <div><strong>VectorFabric</strong></div>
-            <input class="search-bar" placeholder="Search vectors..." />
+            <input className="search-bar" placeholder="Search vectors..." />
             <nav>
-                <a href="#">Gallery</a>
-                <a href="/login">Login</a>
-                <a href="/register">Register</a>
-                <a href="#">Logout</a>
-                <a href="#">Profile</a>
+                <Link to="/">Home</Link>
+                <Link to="#">Gallery</Link>
+                <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
+                <Link to="#">Logout</Link>
+                <Link to="#">Profile</Link>
             </nav>
         </header>
 
