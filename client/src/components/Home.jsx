@@ -4,16 +4,16 @@ export default function Home (){
         <div className="container">
             <h2 className="section-title">Latest Vectors</h2>
             <div className="grid">
-                <div className="card"><img src="https://via.placeholder.com/200"/></div>
-                <div className="card"><img src="https://via.placeholder.com/200"/></div>
-                <div className="card"><img src="https://via.placeholder.com/200"/></div>
+                <div className="card"><img src="https://picsum.photos/200"/></div>
+                <div className="card"><img src="https://picsum.photos/200"/></div>
+                <div className="card"><img src="https://picsum.photos/200"/></div>
             </div>
 
             <h2 className="section-title">Trending Vectors</h2>
             <div className="grid">
-                <div className="card"><img src="https://via.placeholder.com/200"/></div>
-                <div className="card"><img src="https://via.placeholder.com/200"/></div>
-                <div className="card"><img src="https://via.placeholder.com/200"/></div>
+                <div className="card"><img src="https://picsum.photos/200"/></div>
+                <div className="card"><img src="https://picsum.photos/200"/></div>
+                <div className="card"><img src="https://picsum.photos/201"/></div>
             </div>
 
             <h2 className="section-title">Browse by Category</h2>
