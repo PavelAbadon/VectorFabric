@@ -4,6 +4,12 @@ import { generateAuthToken } from "../utils/tokenUtils.js";
 
 //Register
 export async function register (email, password){
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+        throw new Error('A user with this email already exists, their password is ******');
+    }
+
     const user = await User.create({email, password});
     const token = generateAuthToken(user);
 
