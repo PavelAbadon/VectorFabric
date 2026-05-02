@@ -1,11 +1,14 @@
 import { useNavigate } from "react-router";
 import useForm from "../hooks/useForm";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 export default function Register (){
     const navigate = useNavigate();
+    const {onRegister} = useContext(UserContext);
 
     const registerHandler = async(values) => {
-        const { email, password, repeatPassword } = values;
+        const { email, password, repeatPassword } = values;        
 
         // Validation password
         if (password !== repeatPassword) {
@@ -30,8 +33,7 @@ export default function Register (){
                 throw new Error(data.message);
             }
 
-            //onRegister(data);
-
+            onRegister(data);
             navigate('/');
 
         } catch (error) {

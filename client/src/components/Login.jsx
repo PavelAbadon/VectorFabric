@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router";
 import useForm from "../hooks/useForm";
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 export default function Login (){
     const navigate = useNavigate();
+    const {onLogin} = useContext(UserContext);
 
     const loginHandler =  async (values) =>{
         const {email, password} = values;
@@ -21,8 +24,8 @@ export default function Login (){
         if (!response.ok) {
             throw new Error(result.message);
         }
-        console.log(result);        
-        //onLogin(result);
+                
+        onLogin(result);
         navigate('/');
     }
 
