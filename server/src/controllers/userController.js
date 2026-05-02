@@ -37,4 +37,22 @@ userController.get('/logout', async (req, res) => {
     res.status(204).end();
 })
 
+// PROFILE
+userController.get('/:id/details', async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await userService.getOneById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.json(user);
+    } catch (err) {
+        res.status(400).json({ message: getErrorMessage(err) });
+    }
+});
+
+
 export default userController;

@@ -43,3 +43,18 @@ export async function login (email, password){
     };
 
 }
+
+//Profile - GetOneById
+export async function getOneById(userId) {
+    const user = await User.findById(userId);
+
+    if (!user) {
+        return null;
+    }
+
+    return {
+        _id: user._id,
+        email: user.email,
+        createdAt: user.createdAt
+    };
+}
