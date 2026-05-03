@@ -34,15 +34,12 @@ export default function Register (){
             }
 
             onRegister(data);
-            navigate('/');
+            navigate(`/${data._id}/details`);
 
         } catch (error) {
             alert(error.message);
-        }
-
-       
+        }       
     }
-
 
     const {values, changeHandler, submitHandler} = useForm({
         email: '',
