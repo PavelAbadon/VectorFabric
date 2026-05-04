@@ -1,25 +1,32 @@
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
-import { useNavigate } from "react-router";
+//import { useNavigate } from "react-router";
 
 export default function Profile (){
     const { user } = useContext(UserContext);
-    const email = user.email;
-    const username = email.split("@")[0];
+    const email = user?.email;
+    const username = email?.split("@")[0];
+    const profilePicture = user?.profilePicture;
+    console.log(user);
+    console.log(profilePicture);
 
-console.log(username);
+    //console.log(username);
 
     return (
         <div className="container profile-page">
 
             {/* PROFILE HEADER */}
             <div className="profile-header">
-                <div className="avatar"></div>
+                <img 
+                    className="avatar"
+                    src={profilePicture} 
+                    alt="avatar"
+                />
 
                 <div className="profile-info">
-                <h2>{username}</h2>
-                <p>{user.email}</p>
-                <button className="edit-profile-btn">Edit Profile</button>
+                    <h2>{username}</h2>
+                    <p>{user?.email}</p>
+                    <button className="edit-profile-btn">Edit Profile</button>
                 </div>
             </div>
 

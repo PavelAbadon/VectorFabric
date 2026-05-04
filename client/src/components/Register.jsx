@@ -8,11 +8,16 @@ export default function Register (){
     const {onRegister} = useContext(UserContext);
 
     const registerHandler = async(values) => {
-        const { email, password, repeatPassword } = values;        
+        const { email, password, repeatPassword, profilePicture  } = values;        
 
         // Validation password
         if (password !== repeatPassword) {
             return alert('Passwords do not match');
+        }
+
+        //Validation ProfilePicture URL
+        if (profilePicture && !/^https?:\/\/.+/.test(profilePicture)) {
+            return alert('Profile picture must be a valid URL');
         }
 
         try {
@@ -24,6 +29,7 @@ export default function Register (){
                 body: JSON.stringify({
                     email,
                     password,
+                    profilePicture,
                 }),
             });
 
@@ -45,6 +51,7 @@ export default function Register (){
         email: '',
         password: '',
         repeatPassword: '',
+        profilePicture: '',
     },
     registerHandler
     );
@@ -57,6 +64,7 @@ export default function Register (){
                 <input type="email" name="email" value={values.email} onChange={changeHandler} placeholder="Email"/>
                 <input type="password" name="password" value={values.password} onChange={changeHandler} placeholder="Password"/>
                 <input type="password" name="repeatPassword" value={values.repeatPassword} onChange={changeHandler} placeholder="Repeat Password"/>
+                <input type="text" name="profilePicture" value={values.profilePicture} onChange={changeHandler} placeholder="Profile Picture"/>
                 <button>Register</button>
             </div>
             </form>

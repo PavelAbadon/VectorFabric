@@ -8,14 +8,14 @@ export default function Login (){
     const {onLogin} = useContext(UserContext);
 
     const loginHandler =  async (values) =>{
-        const {email, password} = values;
+        const {email, password, profilePicture} = values;
 
         const response = await fetch('http://localhost:3030/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({email, password}),
+                body: JSON.stringify({email, password, profilePicture}),
             });
 
             

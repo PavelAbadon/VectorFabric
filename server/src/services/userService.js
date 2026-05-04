@@ -3,25 +3,26 @@ import bcrypt from 'bcrypt';
 import { generateAuthToken } from "../utils/tokenUtils.js";
 
 //Register
-export async function register (email, password){
+export async function register (email, password, profilePicture){
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
         throw new Error('A user with this email already exists, their password is ******');
     }
 
-    const user = await User.create({email, password});
+    const user = await User.create({email, password, profilePicture});
     const token = generateAuthToken(user);
 
     return {
-        _id: user.id,
-        email: user.email, 
-        accessToken: token, 
-    };
+    _id: user._id,
+    email: user.email, 
+    profilePicture: user.profilePicture,
+    accessToken: token, 
+};
 }
 
 //Login
-export async function login (email, password){
+export async function login (email, password, profilePicture){
     const user = await User.findOne({ email });
     
     if (!user) {
@@ -35,12 +36,14 @@ export async function login (email, password){
     }
 
     const token = generateAuthToken(user);
+    console.log(user);
 
     return {
-        _id: user.id,
-        email: user.email, 
-        accessToken: token, 
-    };
+    _id: user._id,
+    email: user.email, 
+    profilePicture: user.profilePicture,
+    accessToken: token, 
+};
 
 }
 
@@ -55,6 +58,7 @@ export async function getOneById(userId) {
     return {
         _id: user._id,
         email: user.email,
+        profilePicture: user.profilePicture,
         createdAt: user.createdAt
     };
 }

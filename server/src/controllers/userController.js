@@ -6,10 +6,10 @@ const userController = Router();
 
 //REGISTER
 userController.post('/register', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, profilePicture } = req.body;
 
     try {
-        const result = await userService.register(email, password);
+        const result = await userService.register(email, password, profilePicture);
 
         res.status(201).json(result);
     } catch (err) {
@@ -20,10 +20,10 @@ userController.post('/register', async (req, res) => {
 
 //LOGIN
 userController.post('/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { email, password, profilePicture } = req.body;
 
     try {
-        const result = await userService.login(email, password);
+        const result = await userService.login(email, password, profilePicture);
         res.status(201).json(result);
 
     } catch (err) {

@@ -13,6 +13,16 @@ const userSchema = new Schema ({
         required: [true, 'User password is required!'],
         minLength: [6, 'Password too short']
     },
+    profilePicture: {
+    type: String,
+    trim: true,
+    validate: {
+        validator: function (value) {
+            return /^https?:\/\/.+/.test(value);
+        },
+        message: 'Profile picture must be a valid URL!'
+    }
+}
     
 });
 

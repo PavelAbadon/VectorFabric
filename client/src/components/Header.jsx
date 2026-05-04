@@ -22,7 +22,7 @@ export default function Header (){
                 <>
                     <Link to="/" onClick={onLogout}>Logout</Link>
                     <Link to={`/${user._id}/details`}>Profile</Link>
-                    <p>{user.email}</p>
+                    <p>{user?.email}</p>
                 </>}
                 
                 
