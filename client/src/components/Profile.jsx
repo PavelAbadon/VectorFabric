@@ -1,4 +1,14 @@
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
+import { useNavigate } from "react-router";
+
 export default function Profile (){
+    const { user } = useContext(UserContext);
+    const email = user.email;
+    const username = email.split("@")[0];
+
+console.log(username);
+
     return (
         <div className="container profile-page">
 
@@ -7,8 +17,8 @@ export default function Profile (){
                 <div className="avatar"></div>
 
                 <div className="profile-info">
-                <h2>John Doe</h2>
-                <p>john.doe@email.com</p>
+                <h2>{username}</h2>
+                <p>{user.email}</p>
                 <button className="edit-profile-btn">Edit Profile</button>
                 </div>
             </div>

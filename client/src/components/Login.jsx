@@ -26,7 +26,7 @@ export default function Login (){
         }
                 
         onLogin(result);
-        navigate('/');
+        navigate(`/${result._id}/details`);
     }
 
 

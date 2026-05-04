@@ -27,14 +27,14 @@ export default function Register (){
                 }),
             });
 
-            const data = await response.json();
+            const result = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message);
+                throw new Error(result.message);
             }
 
-            onRegister(data);
-            navigate(`/${data._id}/details`);
+            onRegister(result);
+            navigate(`/${result._id}/details`);
 
         } catch (error) {
             alert(error.message);
