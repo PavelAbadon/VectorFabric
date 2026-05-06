@@ -7,9 +7,7 @@ export default function Profile (){
     const email = user?.email;
     const username = email?.split("@")[0];
     const profilePicture = user?.profilePicture;
-    console.log(user);
-    console.log(profilePicture);
-
+    
     //console.log(username);
 
     return (

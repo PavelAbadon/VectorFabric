@@ -1,25 +1,46 @@
 import { useNavigate } from "react-router";
 import useForm from "../hooks/useForm";
-import { useContext } from "react";
+import { useContext, useState } from "react"; 
 import UserContext from "../contexts/UserContext";
 
 export default function Register (){
+
     const navigate = useNavigate();
-    const {onRegister} = useContext(UserContext);
+    const { onRegister } = useContext(UserContext);
 
-    const registerHandler = async(values) => {
-        const { email, password, repeatPassword, profilePicture  } = values;        
+    const [file, setFile] = useState(null);
 
-        // Validation password
+    const registerHandler = async (values) => {
+
+        const { email, password, repeatPassword } = values;
+
+        // Validation Password
         if (password !== repeatPassword) {
             return alert('Passwords do not match');
         }
 
-        //Validation ProfilePicture URL
-        if (profilePicture && !/^https?:\/\/.+/.test(profilePicture)) {
-            return alert('Profile picture must be a valid URL');
+
+        let profilePicture = '';
+        
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'my_preset');
+
+            const response = await fetch(
+                'https://api.cloudinary.com/v1_1/dpxibptlf/image/upload',
+                {
+                    method: 'POST',
+                    body: formData
+                }
+            );
+
+            const data = await response.json();
+
+            profilePicture = data.secure_url;
         }
 
+        
         try {
             const response = await fetch('http://localhost:3030/users/register', {
                 method: 'POST',
@@ -29,7 +50,7 @@ export default function Register (){
                 body: JSON.stringify({
                     email,
                     password,
-                    profilePicture,
+                    profilePicture, 
                 }),
             });
 
@@ -44,31 +65,60 @@ export default function Register (){
 
         } catch (error) {
             alert(error.message);
-        }       
+        }
     }
 
-    const {values, changeHandler, submitHandler} = useForm({
+    const fileChangeHandler = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const { values, changeHandler, submitHandler } = useForm({
         email: '',
         password: '',
         repeatPassword: '',
-        profilePicture: '',
-    },
-    registerHandler
-    );
+        profilePicture: '', 
+    }, registerHandler);
 
     return(
         <div className="container">
             <form onSubmit={submitHandler}>
-            <div className="form-container">
-                <h2>Register</h2>
-                <input type="email" name="email" value={values.email} onChange={changeHandler} placeholder="Email"/>
-                <input type="password" name="password" value={values.password} onChange={changeHandler} placeholder="Password"/>
-                <input type="password" name="repeatPassword" value={values.repeatPassword} onChange={changeHandler} placeholder="Repeat Password"/>
-                <input type="text" name="profilePicture" value={values.profilePicture} onChange={changeHandler} placeholder="Profile Picture"/>
-                <button>Register</button>
-            </div>
+                <div className="form-container">
+
+                    <h2>Register</h2>
+
+                    <input 
+                        type="email" 
+                        name="email" 
+                        value={values.email} 
+                        onChange={changeHandler} 
+                        placeholder="Email"
+                    />
+
+                    <input 
+                        type="password" 
+                        name="password" 
+                        value={values.password} 
+                        onChange={changeHandler} 
+                        placeholder="Password"
+                    />
+
+                    <input 
+                        type="password" 
+                        name="repeatPassword" 
+                        value={values.repeatPassword} 
+                        onChange={changeHandler} 
+                        placeholder="Repeat Password"
+                    />
+                    
+                    <input 
+                        type="file" 
+                        onChange={fileChangeHandler}
+                    />
+
+                    <button>Register</button>
+
+                </div>
             </form>
         </div>
-
     )
 }
