@@ -208,3 +208,86 @@ footer {
   padding: 10px 15px;
   cursor: pointer;
 }
+.upload-page {
+  max-width: 900px;
+  margin: auto;
+}
+
+.upload-container {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.upload-title {
+  margin-bottom: 20px;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-form label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.upload-form input,
+.upload-form textarea,
+.upload-form select {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.upload-form textarea {
+  resize: vertical;
+}
+
+.preview-box {
+  margin-top: 20px;
+  background: #f3f3f3;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+}
+
+.preview-box img {
+  width: 100%;
+  display: block;
+}
+
+.upload-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.upload-btn {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-btn:hover {
+  background: #000;
+}
+
+.cancel-btn {
+  background: #ccc;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #aaa;
+}

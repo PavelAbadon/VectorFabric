@@ -20,8 +20,9 @@ export default function Header (){
                 </>
                 :
                 <>
-                    <Link to="/" onClick={onLogout}>Logout</Link>
+                    <Link to="/upload" >UpLoad Vector</Link>
                     <Link to={`/${user._id}/details`}>Profile</Link>
+                    <Link to="/" onClick={onLogout}>Logout</Link>
                     <p>{user?.email}</p>
                 </>}
                 

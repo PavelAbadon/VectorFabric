@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import EditProfilePage from "./components/EditProfilePage";
+import UploadVector from "./components/UploadVector";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/:id/details" element={<Profile />} />
             <Route path="/:id/edit" element={<EditProfilePage />} />
+            <Route path="/upload" element={<UploadVector />} />
         </Routes>
         <Footer />
     </>
