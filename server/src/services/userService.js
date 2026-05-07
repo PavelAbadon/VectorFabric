@@ -62,3 +62,23 @@ export async function getOneById(userId) {
         createdAt: user.createdAt
     };
 }
+
+//Profile - Edit
+export async function editProfile(userId, data) {
+    const user = await User.findByIdAndUpdate(
+        userId,
+        data,
+        { new: true }
+    );
+    
+    if (!user) {
+        return null;
+    }
+
+    return {
+        _id: user._id,
+        email: user.email,
+        profilePicture: user.profilePicture,
+        createdAt: user.createdAt
+    };
+}

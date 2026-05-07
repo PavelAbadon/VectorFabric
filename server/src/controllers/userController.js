@@ -54,5 +54,23 @@ userController.get('/:id/details', async (req, res) => {
     }
 });
 
+//EDIT PROFILE
+userController.put('/:id/edit', async (req, res) => {
+    const userId = req.params.id;
+    const data = req.body;
+
+    try {
+        const user = await userService.editProfile(userId, data);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.json(user);
+    } catch (err) {
+        res.status(400).json({ message: getErrorMessage(err) });
+    }
+});
+
 
 export default userController;
