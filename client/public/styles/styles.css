@@ -154,3 +154,57 @@ footer {
 }
 
 /* UPLOADS GRID reuse .grid + .card */
+
+.edit-profile-page {
+  max-width: 600px;
+  margin: auto;
+}
+
+/* AVATAR */
+.avatar-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.avatar-preview {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* FORM */
+.edit-profile-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.edit-profile-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+}
+
+/* BUTTONS */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-btn {
+  background: #222;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #ccc;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}

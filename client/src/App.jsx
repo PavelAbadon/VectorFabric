@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
+import EditProfilePage from "./components/EditProfilePage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/:id/details" element={<Profile />} />
+            <Route path="/:id/edit" element={<EditProfilePage />} />
         </Routes>
         <Footer />
     </>

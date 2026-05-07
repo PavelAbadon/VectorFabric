@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
+import { Link } from "react-router";
 //import { useNavigate } from "react-router";
 
 export default function Profile (){
@@ -24,7 +25,9 @@ export default function Profile (){
                 <div className="profile-info">
                     <h2>{username}</h2>
                     <p>{user?.email}</p>
-                    <button className="edit-profile-btn">Edit Profile</button>
+                    <Link className="edit-profile-btn" to={`/${user._id}/edit`}>
+                        Edit Profile
+                    </Link>
                 </div>
             </div>
 
