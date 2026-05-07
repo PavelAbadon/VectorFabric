@@ -13,7 +13,7 @@ export default function EditProfilePage() {
     const username = user?.email?.split('@')[0];
 
     const editProfileHandler = async (values) => {
-            const userId = user._id
+            const userId = user._id;
         const { email, password, repeatPassword } = values;
 
         // Validation Password
@@ -22,7 +22,7 @@ export default function EditProfilePage() {
         }
 
 
-        let profilePicture = '';
+        let profilePicture = values.profilePicture;
         
         if (file) {
             const formData = new FormData();
@@ -150,6 +150,7 @@ export default function EditProfilePage() {
                         <button
                             type="button"
                             className="cancel-btn"
+                            onClick={() => navigate(`/${user._id}/details`)}
                         >
                             Cancel
                         </button>
