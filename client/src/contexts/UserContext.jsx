@@ -11,6 +11,7 @@ export const UserProvider = ({ children }) => {
         const storedUser = localStorage.getItem('auth');
         return storedUser ? JSON.parse(storedUser) : null;
     });
+    
 
     // Логика за login
     const onLogin = (userData) => {
@@ -21,6 +22,13 @@ export const UserProvider = ({ children }) => {
 
     // Логика за register
     const onRegister = (userData) => {
+        setUser(userData); // записва в state
+        localStorage.setItem('auth', JSON.stringify(userData)); // записва в localStorage
+        
+    };
+
+    //Логика за editProfile
+    const onEditProfile = (userData) => {
         setUser(userData); // записва в state
         localStorage.setItem('auth', JSON.stringify(userData)); // записва в localStorage
         
@@ -42,6 +50,7 @@ export const UserProvider = ({ children }) => {
             onLogin,
             onLogout,
             onRegister,
+            onEditProfile,
             isAuthenticated,
         }}>
             {children}

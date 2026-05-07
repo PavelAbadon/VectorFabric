@@ -1,36 +1,87 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import UserContext from "../contexts/UserContext";
 import useForm from "../hooks/useForm";
+import { useNavigate } from "react-router";
 
+export default function EditProfilePage() {
+    const navigate = useNavigate();
+    const { onEditProfile} = useContext(UserContext);
 
-export default function EditProfilePage(){
     const { user } = useContext(UserContext);
+    const [file, setFile] = useState(user.profilePicture);
+
     const username = user?.email?.split('@')[0];
-    
 
     const editProfileHandler = async (values) => {
-    const { password, repeatPassword } = values;
+            const userId = user._id
+        const { email, password, repeatPassword } = values;
 
-    if (password !== repeatPassword) {
-        return alert('Passwords do not match');
+        // Validation Password
+        if (password !== repeatPassword) {
+            return alert('Passwords do not match');
+        }
+
+
+        let profilePicture = '';
+        
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', 'my_preset');
+
+            const response = await fetch(
+                'https://api.cloudinary.com/v1_1/dpxibptlf/image/upload',
+                {
+                    method: 'PUT',
+                    body: formData
+                }
+            );
+
+            const data = await response.json();
+
+            profilePicture = data.secure_url;
+        }
+
+        
+        try {
+            const response = await fetch(`http://localhost:3030/users/${userId}/edit`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                    profilePicture, 
+                }),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.message);
+            }
+
+            onEditProfile(result);
+            navigate(`/${result._id}/details`);
+
+        } catch (error) {
+            alert(error.message);
+        }
     }
 
-    console.log(values);
-};
-    
 
+    const fileChangeHandler = (e) => {
+        setFile(e.target.files[0]);
+    };
 
     const { values, changeHandler, submitHandler } = useForm({
-    email: user?.email || '',
-    password: '',
-    repeatPassword: '',
-    profilePicture: user?.profilePicture || '', 
-}, editProfileHandler);
+        password: '',
+        repeatPassword: '',
+        profilePicture: user?.profilePicture || '',
+    }, editProfileHandler);
 
-    
-
-    return(
-        <>
+    return (
         <div className="container edit-profile-page">
 
             <div className="form-container">
@@ -39,44 +90,76 @@ export default function EditProfilePage(){
 
                 {/* AVATAR PREVIEW */}
                 <div className="avatar-section">
-                <img 
-                    className="avatar-preview"
-                    src={values.profilePicture}
-                    alt="avatar"
-                />
 
-                <input type="file" />
+                    <img
+                        className="avatar-preview"
+                        src={values.profilePicture}
+                        alt="avatar"
+                    />
+
+                    {/* USERNAME */}
+                    <h3>{username}</h3>
+
+                    {/* EMAIL */}
+                    <p>{user?.email}</p>
+
                 </div>
 
-                {/*    FORM */}
-                <form className="edit-profile-form" onSubmit={submitHandler}>
+                {/* FORM */}
+                <form
+                    className="edit-profile-form"
+                    onSubmit={submitHandler}
+                >
 
-                <label>Username</label>
-                <input type="text" value={username} name="username" onChange={changeHandler} />
+                    {/* AVATAR URL */}
+                    <input 
+                        type="file" 
+                        onChange={fileChangeHandler}
+                    />
 
-                <label>Email</label>
-                <input type="email" value={values.email} name="email" onChange={changeHandler}/>
+                    {/* NEW PASSWORD */}
+                    <label>New Password</label>
 
-                <label>Avatar URL</label>
-                <input type="text" value={values.profilePicture} placeholder="https://..." name="profilePricture" onChange={changeHandler}/>
+                    <input
+                        type="password"
+                        name="password"
+                        value={values.password}
+                        placeholder="Leave empty if not changing"
+                        onChange={changeHandler}
+                    />
 
-                <label>New Password</label>
-                <input type="password" placeholder="Leave empty if not changing" name="password" onChange={changeHandler} />
+                    {/* REPEAT PASSWORD */}
+                    <label>Repeat Password</label>
 
-                <label>Repeat Password</label>
-                <input type="password" name="repeatPassword" onChange={changeHandler}/>
+                    <input
+                        type="password"
+                        name="repeatPassword"
+                        value={values.repeatPassword}
+                        onChange={changeHandler}
+                    />
 
-                <div className="form-actions">
-                    <button type="submit" className="save-btn">Save</button>
-                    <button type="button" className="cancel-btn">Cancel</button>
-                </div>
+                    <div className="form-actions">
+
+                        <button
+                            type="submit"
+                            className="save-btn"
+                        >
+                            Save
+                        </button>
+
+                        <button
+                            type="button"
+                            className="cancel-btn"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
 
                 </form>
 
             </div>
 
-            </div>
-        </>
-    )    
-    
-    }
+        </div>
+    );
+}
