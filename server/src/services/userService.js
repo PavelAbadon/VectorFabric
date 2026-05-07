@@ -18,7 +18,7 @@ export async function register (email, password, profilePicture){
     email: user.email, 
     profilePicture: user.profilePicture,
     accessToken: token, 
-};
+    };
 }
 
 //Login
@@ -43,7 +43,7 @@ export async function login (email, password, profilePicture){
     email: user.email, 
     profilePicture: user.profilePicture,
     accessToken: token, 
-};
+    };
 
 }
 
